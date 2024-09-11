@@ -11,20 +11,28 @@ public class Compra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="idCompra")
-    private Long idCompra;
+    private Integer idCompra;
     @Column(name="id_cliente")
     private String idCliente;
     private LocalDateTime fecha;
     @Column(name ="medio_pago")
-    private String medioPago;
+    private Integer medioPago;
     private String comentario;
     private String estado;
 
-    public String getMedioPago() {
+    @ManyToOne
+    @JoinColumn(name="id_cliente",insertable = false, updatable= false)
+    private Cliente cliente;
+
+   // @OneToMany(mappedBy = "producto")
+    //private List<CompraProducto> compraProducto;
+
+
+    public Integer getMedioPago() {
         return medioPago;
     }
 
-    public void setMedioPago(String medioPago) {
+    public void setMedioPago(Integer medioPago) {
         this.medioPago = medioPago;
     }
 
@@ -44,11 +52,11 @@ public class Compra {
         this.idCliente = idCliente;
     }
 
-    public Long getIdCompra() {
+    public Integer getIdCompra() {
         return idCompra;
     }
 
-    public void setIdCompra(Long idCompra) {
+    public void setIdCompra(Integer idCompra) {
         this.idCompra = idCompra;
     }
 
