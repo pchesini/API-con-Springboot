@@ -2,12 +2,12 @@ package com.cursoSpring.dominio;
 
 public class Product {
 
-    private int productid;
+    private Integer productId;
     private String name;
-    private int categoryId;
+    private Integer categoryId;
     private Double price;
-    private int stock;
-    private boolean active;
+    private Integer stock;
+    private Boolean active;
     private Category category;
 
     public String getName() {
@@ -18,12 +18,12 @@ public class Product {
         this.name = name;
     }
 
-    public int getProductid() {
-        return productid;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setProductid(int productid) {
-        this.productid = productid;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getCategoryId() {
