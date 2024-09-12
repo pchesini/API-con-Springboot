@@ -2,8 +2,8 @@ package com.cursoSpring.persistencia.entity;
 
 import jakarta.persistence.*;
 
-import java.awt.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name ="compras")
@@ -24,8 +24,8 @@ public class Compra {
     @JoinColumn(name="id_cliente",insertable = false, updatable= false)
     private Cliente cliente;
 
-   // @OneToMany(mappedBy = "producto")
-    //private List<CompraProducto> compraProducto;
+    @OneToMany(mappedBy = "compra")
+    private List<CompraProducto> productos;
 
 
     public Integer getMedioPago() {
