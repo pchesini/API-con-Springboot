@@ -10,7 +10,7 @@ public interface InterfaceProducto {
     public Optional<List<Producto>> getEscasos(int stock);
     public Optional <Producto> getProducto(int idProducto);
     public Producto saveProducto(Producto producto);
-    public void deleteProducto(int idProducto);
+    public boolean deleteProducto(int idProducto);
     public List<Producto> getByCategoria (int idCategoria);
 
 

@@ -3,6 +3,8 @@ package com.cursoSpring.web.controller;
 import com.cursoSpring.dominio.service.ProductoService;
 import com.cursoSpring.persistencia.entity.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,26 +18,37 @@ public class ProductoController {
     private ProductoService productoS;
 
     @GetMapping("/all")
-    public List<Producto> getAll() {
-        return productoS.getAll();
+    public ResponseEntity<List<Producto>> getAll() {
+        return new ResponseEntity<>(productoS.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/idProducto")
-    public Optional<Producto> getProducto(@PathVariable("idProducto") int idProducto) {
-        return productoS.getProducto(idProducto);
+    public ResponseEntity<Producto> getProducto(@PathVariable("idProducto") int idProducto) {
+        return productoS.getProducto(idProducto)
+                .map(producto -> new ResponseEntity<>(producto, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
 
     }
+
     @PostMapping("/save")
-    public Producto saveProducto(@RequestBody Producto producto){
-        return productoS.saveProducto(producto);
+    public ResponseEntity<Producto> saveProducto(@RequestBody Producto producto) {
+        return new ResponseEntity<>(productoS.saveProducto(producto), HttpStatus.CREATED);
     }
+
     @DeleteMapping("/delete/{id}")
-    public void deleteProducto(@PathVariable("id") int idProducto){
-         productoS.deleteProducto(idProducto);
+    public ResponseEntity deleteProducto(@PathVariable("id") int idProducto) {
+        if (productoS.deleteProducto(idProducto)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+           return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-    //@GetMapping("/categoria/idCategoria{}")
-    //public Optional<List<Producto>> getByCategoria(@PathVariable("idCategoria") int idCategoria ){
-     //   return productoS.getByCategoria(idCategoria);
-    //}
+
+    //
+//    @GetMapping("/categoria/{idCategoria}")
+//    public ResponseEntity<List<Producto>> getByCategoria(@PathVariable("idCategoria") int idCategoria ){
+//        return productoS.getByCategoria(idCategoria).map(productos -> new ResponseEntity<>(productos, HttpStatus.OK))
+//        ..orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//    }
 }
 

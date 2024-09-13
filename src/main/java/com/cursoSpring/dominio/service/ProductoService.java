@@ -33,8 +33,9 @@ public class ProductoService implements InterfaceProducto{
     }
 
     @Override
-    public void deleteProducto(int idProducto) {
-        productoR.deleteById(idProducto);
+    public boolean deleteProducto(int idProducto) {
+         productoR.deleteById(idProducto);
+        return false;
     }
 
     @Override
