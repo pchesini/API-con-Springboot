@@ -36,4 +36,9 @@ public class ProductoService implements InterfaceProducto{
     public void deleteProducto(int idProducto) {
         productoR.deleteById(idProducto);
     }
+
+    @Override
+    public List<Producto> getByCategoria(int id_categoria ) {
+        return productoR.findByIdCategoria(id_categoria);
+    }
 }
