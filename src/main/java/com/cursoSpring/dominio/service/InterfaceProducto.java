@@ -11,6 +11,7 @@ public interface InterfaceProducto {
     public Optional <Producto> getProducto(int idProducto);
     public Producto saveProducto(Producto producto);
     public void deleteProducto(int idProducto);
+    public List<Producto> getByCategoria (int idCategoria);
 
 
 
